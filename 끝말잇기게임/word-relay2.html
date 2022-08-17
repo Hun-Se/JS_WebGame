@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <h2>쿵쿵따</h2>
+    <p>글자는 세개로 제한됩니다.</p>
+    <p><span id="order">1</span>번째 순서</p>
+    <p>제시어 : <span id="word"></span></p>
+    <form method="get">
+      <input id="input" type="text" />
+      <button id="button" type="button">입력</button>
+    </form>
+    <script>
+      const number = Number(prompt("몇명인가요?"));
+
+      if (number) {
+        const $input = document.querySelector("#input");
+        const $button = document.querySelector("#button");
+        const $order = document.querySelector("#order");
+        const $word = document.querySelector("#word");
+
+        let word;
+        let newWord;
+        const onClickbutton = (e) => {
+          if (!word || word[word.length - 1] === newWord[0]) {
+            word = newWord;
+            $word.textContent = word;
+            const order = $order.textContent;
+            if (order + 1 > number) {
+              $order.textContent = 1;
+            } else {
+              $order.textContent = order + 1;
+            }
+            $input.value = "";
+            $input.focus();
+          } else {
+            alert("올바르지 않은 단어 입니다.");
+          }
+        };
+
+        const onInput = (e) => {
+          newWord = e.target.value;
+          word = newWord;
+          if (word.length > 3) {
+            alert("글자 수는 3개로 제한합니다. 다시 입력 해주세요");
+            $input.value = "";
+            $input.focus();
+          }
+        };
+
+        $input.addEventListener("input", onInput);
+        $button.addEventListener("click", onClickbutton);
+      }
+    </script>
+  </body>
+</html>
