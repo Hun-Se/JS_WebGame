@@ -62,14 +62,47 @@
       const $operator = document.querySelector("#operator");
       const $number = document.querySelector("#number");
 
-      document.querySelector("#num-0").addEventListener("click", () => {
+      const onClickNumber = (event) => {
         if (operator) {
-          numTwo += "0";
+          numTwo += event.target.textContext;
         } else {
-          numOne += "0";
+          numOne += event.target.textContext;
         }
-        $result.value += "0";
-      });
+        $result.value += event.target.textContext;
+      };
+
+      const onClickOperator = (op) => {
+        if (numOne) {
+          operator = op;
+          $operator.value = op;
+        } else {
+          alert("숫자를 입력하세요");
+        }
+      };
+
+      document.querySelector("#num-0").addEventListener("click", onClickNumber);
+      document.querySelector("#num-1").addEventListener("click", onClickNumber);
+      document.querySelector("#num-2").addEventListener("click", onClickNumber);
+      document.querySelector("#num-3").addEventListener("click", onClickNumber);
+      document.querySelector("#num-4").addEventListener("click", onClickNumber);
+      document.querySelector("#num-5").addEventListener("click", onClickNumber);
+      document.querySelector("#num-6").addEventListener("click", onClickNumber);
+      document.querySelector("#num-7").addEventListener("click", onClickNumber);
+      document.querySelector("#num-8").addEventListener("click", onClickNumber);
+      document.querySelector("#num-9").addEventListener("click", onClickNumber);
+
+      document
+        .querySelector("#plus")
+        .addEventListener("click", onClickOperator("+"));
+      document
+        .querySelector("#minus")
+        .addEventListener("click", onClickOperator("-"));
+      document
+        .querySelector("#divide")
+        .addEventListener("click", onClickOperator("/"));
+      document
+        .querySelector("#multiply")
+        .addEventListener("click", onClickOperator("*"));
     </script>
   </body>
 </html>
