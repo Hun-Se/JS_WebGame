@@ -60,7 +60,7 @@
       let operator = "";
       let numTwo = "";
       const $operator = document.querySelector("#operator");
-      const $number = document.querySelector("#number");
+      const $result = document.querySelector("#number");
 
       const onClickNumber = (event) => {
         if (operator) {
@@ -69,15 +69,6 @@
           numOne += event.target.textContext;
         }
         $result.value += event.target.textContext;
-      };
-
-      const onClickOperator = (op) => {
-        if (numOne) {
-          operator = op;
-          $operator.value = op;
-        } else {
-          alert("숫자를 입력하세요");
-        }
       };
 
       document.querySelector("#num-0").addEventListener("click", onClickNumber);
@@ -89,7 +80,18 @@
       document.querySelector("#num-6").addEventListener("click", onClickNumber);
       document.querySelector("#num-7").addEventListener("click", onClickNumber);
       document.querySelector("#num-8").addEventListener("click", onClickNumber);
-      document.querySelector("#num-9").addEventListener("click", onClickNumber);
+      document
+        .querySelector("#num-9 ")
+        .addEventListener("click", onClickNumber);
+
+      const onClickOperator = (op) => {
+        if (numOne) {
+          operator = op;
+          $operator.value = op;
+        } else {
+          // alert("숫자를 입력하세요");
+        }
+      };
 
       document
         .querySelector("#plus")
