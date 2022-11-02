@@ -1,7 +1,6 @@
 const $input = document.querySelector("#text");
 const $form = document.querySelector("#form");
 const $logs = document.querySelector("#logs");
-
 const numbers = [];
 for (let i = 1; i <= 9; i++) {
   numbers.push(i);
@@ -16,6 +15,7 @@ for (let i = 0; i <= 3; i++) {
 }
 
 const tries = [];
+
 function checkInput(input) {
   if (input.length !== 4) {
     return alert("4자리를 만들어 주세요.");
@@ -31,6 +31,13 @@ function checkInput(input) {
   return true;
 }
 
+function defeated() {
+  const message = document.createTextNode(`패배! 정답은 ${answer.join("")}`);
+  $logs.appendChild(message);
+}
+
+let out = 0;
+
 $form.addEventListener("submit", (event) => {
   event.preventDefault();
   const value = $input.value;
@@ -45,37 +52,47 @@ $form.addEventListener("submit", (event) => {
   let strike = 0;
   let ball = 0;
 
-  // for (let i = 0; i < answer.length; i++) {
-  //   const index = value.indexOf(answer[i]);
-  //   if (index > -1) {
-  //     if (index === i) {
-  //       strike += 1;
-  //     } else {
-  //       ball += 1;
-  //     }
-  //   }
-  // }
-
-  //forEach문
-  answer.forEach((number, aIndex) => {
-    const index = value.indexOf(String(number));
+  for (let i = 0; i < answer.length; i++) {
+    const index = value.indexOf(answer[i]);
     if (index > -1) {
-      if (index === aIndex) {
+      if (index === i) {
         strike += 1;
       } else {
         ball += 1;
       }
     }
-  });
-
-  $logs.append(
-    `${value}: ${strike} 스트라이크 ${ball} 볼`,
-    document.createElement("br")
-  );
-  tries.push(value);
-
-  if (tries.length >= 4) {
-    const message = document.createTextNode(`패배! 정답은 ${answer.join("")}`);
-    $logs.appendChild(message);
   }
+
+  //forEach문
+  // answer.forEach((number, aIndex) => {
+  //   const index = value.indexOf(String(number));
+  //   if (index > -1) {
+  //     if (index === aIndex) {
+  //       strike += 1;
+  //     } else {
+  //       ball += 1;
+  //     }
+  //   }
+  // });
+
+  if (strike === 0 && ball === 0) {
+    out++;
+    $logs.append(`${value}: ${out} 아웃`, document.createElement("br"));
+  } else {
+    $logs.append(
+      `${value}: ${strike} 스트라이크 ${ball} 볼`,
+      document.createElement("br")
+    );
+  }
+
+  if (tries.length >= 9) {
+    defeated();
+    return;
+  }
+
+  if (out === 3) {
+    defeated();
+    return;
+  }
+  tries.push(value);
 });
