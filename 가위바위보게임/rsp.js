@@ -35,8 +35,11 @@ const changeComputerHand = () => {
 let intervalId = setInterval(changeComputerHand, 50);
 
 let clickable = true;
-let score = 0;
+let count = 0;
+let my_score = 0;
+let computer_score = 0;
 const clickButton = () => {
+  count += 1;
   if (clickable) {
     clearInterval(intervalId);
     clickable = false;
@@ -52,19 +55,25 @@ const clickButton = () => {
     const diff = myScore - computerScore;
     let message;
     if ([2, -1].includes(diff)) {
-      score += 1;
+      my_score += 1;
       message = "승리";
     } else if ([-2, 1].includes(diff)) {
-      score -= 1;
+      computer_score += 1;
       message = "패배";
     } else {
       message = "무승부";
     }
-    $score.textContent = `${message} 총: ${score}점`;
-    setTimeout(() => {
-      clickable = true;
-      intervalId = setInterval(changeComputerHand, 50);
-    }, 1000);
+    if (my_score === 3) {
+      $score.textContent = `나의 승리 나: ${my_score} 컴퓨터: ${computer_score} `;
+    } else if (computer_score === 3) {
+      $score.textContent = `컴퓨터의 승리 나: ${my_score} 컴퓨터: ${computer_score} `;
+    } else {
+      $score.textContent = `${message} 나 : ${my_score} 컴퓨터: ${computer_score}`;
+      setTimeout(() => {
+        clickable = true;
+        intervalId = setInterval(changeComputerHand, 50);
+      }, 1000);
+    }
   }
 };
 
