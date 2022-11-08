@@ -81,3 +81,17 @@
   // 3초 있다가 sayHello 함수 실행
   setTimeout(sayHello(),3000);
   ```
+
+  5. 가위바위보게임
+
+  - setInterval: 특정 주기마다 반복되는 함수를 실행
+
+  ```JavaScript
+  setInterval(() => {
+    원하는함수
+  }, 1000)
+  ```
+
+  - clearInterval : setInterval로 실행시켰던 함수를 취소
+
+  - removeEventListener: addEventListener로 연결한 함수를 제거
