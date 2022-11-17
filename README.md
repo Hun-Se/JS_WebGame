@@ -134,3 +134,10 @@ monster = _.cloneDeep(monsterList[0]);
 const 얕은배열복사 = [...array];
 const 얕은객체복사 = {...obj};
 ```
+
+- window : 브라우져를 가르키는 객체이다. document 객체나 console 객체도 실제로는 window.document, window.console 인데 평소에는 window를 생략하고 document와 console만 사용한다.
+
+- this: 상황에 따라 다른 값을 가진다. 기본적으로는 window를 가르킨다.
+  1. 객체를 통해 this를 사용하면 this가 해당 객체를 가르킨다.
+  2. 특정 메서드는 콜백 함수의 this를 바꾼다. ex) addEventListener
+  3. this가 바뀌는 것을 원치 않는다면 함수 선언문 대신 화살표 함수를 사용하자.
