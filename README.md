@@ -95,3 +95,42 @@
   - clearInterval : setInterval로 실행시켰던 함수를 취소
 
   - removeEventListener: addEventListener로 연결한 함수를 제거
+
+### 텍스트 RPG
+
+- 깊은복사: JSON.parse(JSON.stringify(list[])) 메서드를 사용하여 깊은복사를 할 수 있다.
+
+```JavaScript
+monster = JSON.parse(
+      JSON.stringify(
+        monsterList[0]
+      )
+    );
+
+```
+
+- 깊은복사를한 변수는 새로 객체를 만든다. 따라서 깊은 복사한 객체를 변경하더라도 기존의 객체는 변하지 않는다.
+
+- 일반적인 변수 대입은 기존 객체를 참조한다. 따라서 대입한 변수의 객체를 변경하면 기존 객체도 변경이된다.
+
+- 객체를 변경시키지 않고 재사용 하기 위해선 깊은 복사를 이용해보자. 다만 성능이 느리고 함수나 Math, Data와 같은 객체는 복사 할 수 없다. 따라서 간단한 객체에는 사용해도 상관 없지만 실무에서는 lodash와 같은 라이브러리를 사용한다.
+
+- 문자열, boolean, 숫자 같은 자료형은 변수에 대입하는 것으로도 복사 할 수 있다.
+
+- 내부에 객체가 들어있지 않은 배열은 slice 메서드를 통해 복사 할 수 있다.
+
+```JavaScript
+// lodash 설치
+npm install lodash
+
+import _ from 'lodash'
+
+monster = _.cloneDeep(monsterList[0]);
+```
+
+- 얕은복사: 얕은 복사는 중첩된 객체가 있을 때 가장 바깥쪽의 객체만 복사되고, 내부 객체는 참조 관계를 유지하는 복사를 의미한다.
+
+```JavaScript
+const 얕은배열복사 = [...array];
+const 얕은객체복사 = {...obj};
+```
